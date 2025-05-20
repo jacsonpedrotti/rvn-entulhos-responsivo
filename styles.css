@@ -29,17 +29,24 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
+  height: 80px;
+  overflow: hidden;
 }
 
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0;
+  height: 100%;
 }
 
 .logo {
   box-sizing: border-box;
-  height: 120px;
+  height: 100px;
+  margin: 0 0 0 30px;
+  transform: scale(0.8);
+  transform-origin: left center;
 }
 
 .logo-2 {
@@ -48,13 +55,39 @@ header {
 
 nav {
   position: relative;
+  margin-right: 30px;
 }
 
 .menu {
   display: flex;
   gap: 30px;
   list-style: none;
-  transition: max-height 0.3s;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li a {
+  color: var(--green-main);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s;
+  padding: 8px 0;
+}
+
+.menu li a:hover {
+  color: var(--green-light);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--green-main);
+  font-size: 2rem;
+  cursor: pointer;
+  margin-left: 20px;
+  z-index: 100;
 }
 
 .galeria {
@@ -83,29 +116,6 @@ nav {
   margin-bottom: 15px;
 }
 
-.menu li a {
-  color: var(--green-main);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color 0.2s;
-  padding: 8px 0;
-}
-
-.menu li a:hover {
-  color: var(--green-light);
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--green-main);
-  font-size: 2rem;
-  cursor: pointer;
-  margin-left: 20px;
-}
-
 .hero {
   background: linear-gradient(135deg, var(--dark-bg2) 60%, var(--green-dark) 100%);
   padding: 60px 0 40px 0;
@@ -122,12 +132,25 @@ nav {
 .hero-text {
   flex: 1 1 350px;
   min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-logo {
+  width: 280px;
+  margin-bottom: 15px;
+  display: block;
+  margin-left: 40px;
 }
 
 .hero-text h1 {
   font-size: 2.5rem;
   color: var(--green-main);
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
+  text-align: center;
+  width: 100%;
 }
 
 .hero-text p {
@@ -326,38 +349,228 @@ footer p>a {
 
 /* RESPONSIVIDADE */
 @media (max-width: 900px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-container {
+    padding: 0;
+    justify-content: flex-start;
+  }
+
+  .logo {
+    height: 80px;
+    margin: 0 0 0 25px;
+    transform: scale(0.85);
+  }
+
+  nav {
+    display: none;
+  }
 
   .menu {
-    visibility: hidden;
+    display: none;
   }
 
-  .hero-content,
-  .contato-content,
-  .servicos-cards,
-  .fotos-galeria {
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 25px !important;
+  .hero-content {
+    padding: 20px 0;
+    text-align: center;
+    justify-content: center;
   }
 
-  .hero-text,
-  .hero-img,
-  .contato-content>div,
-  .contato-img,
-  .servico-card {
-    text-align: center !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin: 0 auto !important;
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .hero-text p {
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto 25px;
+  }
+
+  .hero-img {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .hero-img img {
+    width: 250px;
     margin: 0 auto;
   }
 
-  .fotos-galeria img {
-    width: 90vw;
+  .servicos-cards {
+    padding: 0 15px;
+  }
+
+  .servico-card {
+    padding: 20px 15px;
+    margin: 0 auto;
+    width: 100%;
     max-width: 320px;
+  }
+
+  .servico-icon {
+    font-size: 2rem;
+    margin: 0 auto 10px;
+  }
+
+  .vantagens {
+    padding: 40px 15px;
+  }
+
+  .vantagens ul {
+    padding: 0 20px;
+  }
+
+  .vantagens li {
+    font-size: 1rem;
+    text-align: center;
+    padding-left: 0;
+    margin-bottom: 15px;
+  }
+
+  .vantagens li::before {
+    display: none;
+  }
+
+  .contato-content {
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .contato-content > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contato h2 {
+    text-align: center;
+  }
+
+  .contato p {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto 20px;
+  }
+
+  .iframe {
+    width: 100%;
+    max-width: 320px;
+    height: 250px;
+    margin: 0 auto;
+  }
+
+  header {
+    height: 70px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .nav-container {
+    padding: 0;
+  }
+
+  .logo {
+    height: 70px;
+    margin: 0 0 0 20px;
+    transform: scale(0.9);
+  }
+
+  .hero-text h1 {
+    font-size: 1.8rem;
+    margin-top: 20px;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .btn-whats {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .fotos-galeria {
+    padding: 0 10px;
+  }
+
+  .fotos-galeria img {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 15px;
+  }
+
+  .servicos h2,
+  .galeria h2,
+  .vantagens h2,
+  .contato h2 {
+    font-size: 1.5rem;
+    padding: 0 15px;
+    margin-bottom: 20px;
+  }
+
+  .servico-card {
+    padding: 15px 10px;
+    margin: 0 auto 15px;
+  }
+
+  .servico-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .servico-card p {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+
+  .vantagens li {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .contato p {
+    font-size: 0.9rem;
+    padding: 0 15px;
+  }
+
+  footer {
+    padding: 20px 15px;
+    text-align: center;
+  }
+
+  footer > p {
+    margin: 5px 0;
+  }
+
+  .menu-toggle {
+    font-size: 1.8rem;
+  }
+
+  header {
+    height: 60px;
+  }
+
+  nav, .menu, .menu-toggle {
+    display: none;
   }
 }
